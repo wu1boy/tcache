@@ -1,0 +1,11 @@
+#数据分区，根据该值mod .决定存入哪个分区.为了防止数据都在一个map内导致锁粒度太大. 参数根据key的量可以调整大小.
+shark : 5
+
+#bind port
+port : 3333
+
+#bind addr
+addr : '127.0.0.1'
+
+#最大允许使用内存(G)
+maxmemory: 8
