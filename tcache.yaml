@@ -9,3 +9,7 @@ addr : '127.0.0.1'
 
 #最大允许使用内存(G)
 maxmemory: 8
+
+#engine .存储引擎 1内存 2磁盘
+engine : 1
+

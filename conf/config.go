@@ -7,22 +7,26 @@ import (
 )
 
 type Config struct {
-	Shark     int    `yaml:"shark"`
-	Port      int    `yaml:"port"`
+	Shark     uint32 `yaml:"shark"`
+	Port      string `yaml:"port"`
 	Addr      string `yaml:"addr"`
 	MaxMemory string `yaml:"maxmemory"`
+	Engine    uint8  `yaml:"engine"`
 }
 
-func (c *Config) GetConfig(filepath string) {
+func GetConfig(filepath string) *Config {
 	yamlFile, err := ioutil.ReadFile(filepath)
 
 	if err != nil {
-		log.Printf("yamlFile.Get err #%v ", err)
-		panic("")
+		log.Fatalf("打开配置文件错误: #%v ", err)
 	}
-	err = yaml.Unmarshal(yamlFile, c)
+
+	config := &Config{}
+	err = yaml.Unmarshal(yamlFile, config)
+
 	if err != nil {
-		log.Fatalf("Unmarshal: %v", err)
-		panic("")
+		log.Fatalf("yaml格式错误: %v", err)
 	}
+
+	return config
 }

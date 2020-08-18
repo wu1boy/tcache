@@ -10,25 +10,25 @@ type Service struct {
 	engine.Cache
 }
 
-func (s *Service)Listen() {
-	l,err := net.Listen("tcp","127.0.0.1:23456")
+func (s *Service) Listen(addr string) {
+
+	l, err := net.Listen("tcp", addr)
 
 	if err != nil {
 		panic(err.Error())
 	}
 
 	for {
-		c,err := l.Accept()
+		client, err := l.Accept()
 
 		if err != nil {
 			log.Println(err.Error())
 			continue
 		}
-
-		go s.process(c)
+		go s.process(client)
 	}
 }
 
-func New(c engine.Cache) *Service {
-	return &Service{c}
+func New(cache engine.Cache) *Service {
+	return &Service{cache}
 }
