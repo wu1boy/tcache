@@ -1,15 +1,24 @@
 #数据分区，根据该值mod .决定存入哪个分区.为了防止数据都在一个map内导致锁粒度太大. 参数根据key的量可以调整大小.
-shark : 5
+shark: 5
 
 #bind port
-port : 3333
+port: 3333
 
 #bind addr
-addr : '127.0.0.1'
+addr: '127.0.0.1'
 
-#最大允许使用内存(G)
-maxmemory: 8
+#最大允许使用内存. 0 不限制
+# 其他请使用 KB MB GB等单位. 不区分大小写. 如果设置错误会使用默认值0.
+maxmemory: 8GB
 
 #engine .存储引擎 1内存 2磁盘
-engine : 1
+engine: 1
 
+#eliminate  淘汰算法 1:lru  2:random
+eliminate: 1
+
+#eliminate-polic  内存淘汰策略  1. 所有key lru算法  2.所有key随机算法
+eliminate-polic: 1
+
+#hz . 定时任务时间频率。每秒执行次数
+hz : 10

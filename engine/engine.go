@@ -6,19 +6,20 @@ import (
 )
 
 func New(config *conf.Config) Cache {
-	var c Cache
+	var cache Cache
 
 	if config.Engine == 1 {
 		//内存存储
-		c = MemoryEngineNew(config)
+		cache = MemoryEngineNew(config)
+
 	}
 
-	if c == nil {
+	if cache == nil {
 		panic("unkown cache engine !")
 	}
 
 	log.Println("ready to server")
 
-	return c
+	return cache
 
 }

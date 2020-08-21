@@ -2,7 +2,6 @@ package timewheel
 
 import (
 	"container/list"
-	"fmt"
 	"time"
 )
 

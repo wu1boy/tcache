@@ -1,28 +1,30 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"tcache/timewheel"
-	"time"
+	"runtime"
+	"tcache/conf"
 )
 
 //var lastTotalFreed uint64
 
 func main() {
-	tw := timewheel.New(2 * time.Second,3,  func(data interface{}) {
-		fmt.Println(11111)
-	})
-	tw.Start()
-	tw.AddTimer(1 * time.Second,"k1","")
-	tw.AddTimer(3 * time.Second,"k2","")
 
-	select {
+	configPath := flag.String("configPath","./tcache.yaml","配置文件路径")
+	flag.Parse()
 
-	}
-	//configPath := flag.String("configPath","./tcache.yaml","配置文件路径")
-	//flag.Parse()
-	//
-	//config := conf.GetConfig(*configPath)
+	config := conf.GetConfig(*configPath)
+	//解析maxmemory 的值.
+	config.ParseMaxMemory()
+
+
+	//////////
+	var ms *runtime.MemStats
+	runtime.ReadMemStats(ms)
+	fmt.Println(ms.Alloc)
+
+	return
 	//cache := engine.New(config)
 	//
 	//var buffer strings.Builder
